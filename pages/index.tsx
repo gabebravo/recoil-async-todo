@@ -1,5 +1,4 @@
 // import { css } from '@emotion/react';
-// import Todolist from '../components/Todolist';
 import dynamic from 'next/dynamic';
 const Todolist = dynamic(() => import('../components/Todolist'), {
   ssr: false,
@@ -8,6 +7,7 @@ import { Box, Text } from '@chakra-ui/react';
 import TodoForm from '../components/TodoForm';
 import TodoCount from '../components/TodoCount';
 import ResetTodos from '../components/ResetTodos';
+// import Todolist from '../components/Todolist';
 
 // const todoInput = css`
 //   color: blue;
