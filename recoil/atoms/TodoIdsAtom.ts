@@ -1,6 +1,6 @@
 import { atom } from 'recoil';
 
-const TodoIdAtom = atom({
+const todoIdsAtom = atom({
   key: 'TodoIds',
   default: [],
 });
