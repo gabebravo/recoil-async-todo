@@ -1,19 +1,27 @@
-import { useRecoilValue } from 'recoil';
-// import TodoType from '../types/TodoType';
-// import todosAtom from '../recoil/atoms/todosAtom';
-// import TodoItem from './TodoItem';
+import { useRecoilValueLoadable } from 'recoil';
+import { Todo } from '../types/TodoType';
+import TodoItem from '../components/TodoItem';
+import selectorAllTodos from '../recoil/selectors/TodoIdsSelector';
 import { OrderedList } from '@chakra-ui/react';
 
 function Todolist() {
-  // const todos = useRecoilValue(todosAtom);
+  const todos = useRecoilValueLoadable(selectorAllTodos);
+  console.log('todos', todos);
 
-  return (
-    <OrderedList>
-      {/* {todos?.map((todo: TodoType) => (
-        <TodoItem key={todo.id} todo={todo} />
-      ))} */}
-    </OrderedList>
-  );
+  switch (todos.state) {
+    case 'hasValue':
+      return (
+        <OrderedList>
+          {todos.contents.map((todo: Todo) => (
+            <TodoItem key={todo.id} todo={todo} />
+          ))}
+        </OrderedList>
+      );
+    case 'loading':
+      return <div>Loading...</div>;
+    case 'hasError':
+      throw <div>Whoops! Error...</div>;
+  }
 }
 
 export default Todolist;
