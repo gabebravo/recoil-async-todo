@@ -1,36 +1,52 @@
-// import { css } from '@emotion/react';
-import dynamic from 'next/dynamic';
-const Todolist = dynamic(() => import('../components/Todolist'), {
-  ssr: false,
-});
+import { todosAtom } from '../recoil/atoms/TodosAtom';
 import { Box, Text } from '@chakra-ui/react';
 import TodoForm from '../components/TodoForm';
 import TodoCount from '../components/TodoCount';
 import ResetTodos from '../components/ResetTodos';
-// import Todolist from '../components/Todolist';
+import { Todo } from '../types/TodoType';
+import { RecoilRoot } from 'recoil';
+import Todolist from '../components/Todolist';
 
-// const todoInput = css`
-//   color: blue;
-// `;
+export async function getStaticProps() {
+  // Call an external API endpoint to get todos
+  const appId = process.env.NEXT_PUBLIC_API_ID;
+  const todoData = await fetch(`https://${appId}.mockapi.io/todo`);
+  const todos = await todoData.json();
 
-const BasicTodoAtom = () => {
+  // By returning { props: { todos } }, the BasicTodoAtom component
+  // will receive `todos` as a prop at build time
+  return {
+    props: {
+      todos,
+    },
+  };
+}
+
+const BasicTodoAtom = ({ todos }: { todos: Todo[] }) => {
   return (
-    <div>
-      <Box m="1em">
-        <Text fontSize="xl">Basic Todo Atom</Text>
-        <ResetTodos />
-      </Box>
-      <Box m="1em">
-        <TodoCount />
-      </Box>
-      <Box m="1em">
-        <TodoForm />
-      </Box>
-      <Box>
-        <Todolist />
-      </Box>
-    </div>
+    <RecoilRoot initializeState={(snapshot) => snapshot.set(todosAtom, todos)}>
+      <div>
+        <Box m="1em">
+          <Text fontSize="xl">Basic Todo Atom</Text>
+          <ResetTodos />
+        </Box>
+        <Box m="1em">
+          <TodoCount />
+        </Box>
+        <Box m="1em">
+          <TodoForm />
+        </Box>
+        <Box>
+          <Todolist />
+        </Box>
+      </div>
+    </RecoilRoot>
   );
 };
 
 export default BasicTodoAtom;
+
+// import { css } from '@emotion/react';
+// const todoInput = css`
+//   color: blue;
+// `;

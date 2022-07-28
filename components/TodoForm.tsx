@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, Button, Flex } from '@chakra-ui/react';
-import { useSetRecoilState } from 'recoil';
+// import { useSetRecoilState } from 'recoil';
 // import todosAtom from '../recoil/atoms/todosAtom';
 // import TodoType from '../types/TodoType';
 // import { isEmptyOrSpaces } from '../utils';
@@ -16,10 +16,10 @@ const TodoForm = () => {
     // @ts-ignore
     if (!isEmptyOrSpaces(todoValue)) {
       // @ts-ignore
-      setTodos((todos: TodoType[]) => [
-        ...todos,
-        { id: todos.length + 1, text: todoValue, completed: false },
-      ]);
+      // setTodos((todos: TodoType[]) => [
+      //   ...todos,
+      //   { id: todos.length + 1, text: todoValue, completed: false },
+      // ]);
     }
     // @ts-ignore
     todoInputRef.current.value = '';
