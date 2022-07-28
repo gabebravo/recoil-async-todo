@@ -1,4 +1,4 @@
-import { todosAtom } from '../recoil/atoms/TodosAtom';
+import todosAtom from '../recoil/atoms/TodosAtom';
 import { Box, Text } from '@chakra-ui/react';
 import TodoForm from '../components/TodoForm';
 import TodoCount from '../components/TodoCount';

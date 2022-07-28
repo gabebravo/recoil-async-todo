@@ -9,7 +9,6 @@ const createTodoSelector = selector({
   get: () => {
     return null;
   },
-  // @ts-ignore
   set: async ({ get, set }, rawTodo) => {
     const todos = get(todosAtom);
     const todoFromService = await createTodo(rawTodo);
