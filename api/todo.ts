@@ -41,7 +41,11 @@ export const createTodo = async (newTodo: any): Promise<any> => {
   try {
     const data = await fetch(`https://${appId}.mockapi.io/todo`, {
       method: 'POST',
-      body: newTodo,
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(newTodo),
     });
     return await data.json();
   } catch (error) {

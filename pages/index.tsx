@@ -1,8 +1,7 @@
-import todosAtom from '../recoil/atoms/TodosAtom';
+import { todosAtom } from '../recoil/TodoAtoms';
 import { Box, Text } from '@chakra-ui/react';
 import TodoForm from '../components/TodoForm';
 import TodoCount from '../components/TodoCount';
-import ResetTodos from '../components/ResetTodos';
 import { Todo } from '../types/TodoType';
 import { RecoilRoot } from 'recoil';
 import Todolist from '../components/Todolist';
@@ -28,7 +27,6 @@ const BasicTodoAtom = ({ todos }: { todos: Todo[] }) => {
       <div>
         <Box m="1em">
           <Text fontSize="xl">Basic Todo Atom</Text>
-          <ResetTodos />
         </Box>
         <Box m="1em">
           <TodoCount />

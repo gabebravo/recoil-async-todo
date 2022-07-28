@@ -1,8 +1,8 @@
 import { useRecoilValue } from 'recoil';
 import { Todo } from '../types/TodoType';
 import TodoItem from '../components/TodoItem';
-import todosAtom from '../recoil/atoms/TodosAtom';
 import { OrderedList } from '@chakra-ui/react';
+import { todosAtom } from '../recoil/TodoAtoms';
 
 function Todolist() {
   const todos = useRecoilValue(todosAtom);

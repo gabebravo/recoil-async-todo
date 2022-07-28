@@ -6,3 +6,8 @@ export type Todo = {
   task: string;
   done: boolean;
 };
+
+export type TodoCount = {
+  incomplete: number;
+  complete: number;
+};

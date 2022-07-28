@@ -1,27 +1,23 @@
 import React from 'react';
 import { Box, Button, Flex } from '@chakra-ui/react';
-// import { useSetRecoilState } from 'recoil';
-// import todosAtom from '../recoil/atoms/todosAtom';
-// import TodoType from '../types/TodoType';
-// import { isEmptyOrSpaces } from '../utils';
+import { createTodo } from '../api/todo';
+import { isEmptyOrSpaces } from '../utils';
+import { useAddTodo } from '../hooks/todoCrudHooks';
 
 const TodoForm = () => {
   const todoInputRef = React.useRef<HTMLInputElement>(null);
-  // const setTodos = useSetRecoilState(todosAtom);
+  const addTodo = useAddTodo();
 
-  function submitHandler(event: { preventDefault: () => void }) {
+  async function submitHandler(event: { preventDefault: () => void }) {
     event.preventDefault();
     const todoValue = todoInputRef?.current?.value;
 
-    // @ts-ignore
     if (!isEmptyOrSpaces(todoValue)) {
-      // @ts-ignore
-      // setTodos((todos: TodoType[]) => [
-      //   ...todos,
-      //   { id: todos.length + 1, text: todoValue, completed: false },
-      // ]);
+      const newTodo = await createTodo({ task: todoValue, done: false });
+      addTodo(newTodo);
     }
-    // @ts-ignore
+
+    // @ts-ignore : RESET REF
     todoInputRef.current.value = '';
   }
 
