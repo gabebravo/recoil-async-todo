@@ -1,4 +1,5 @@
-import { useSetRecoilState } from 'recoil';
+import { useDeleteTodo, useUpdateTodo } from '../hooks/todoCrudHooks';
+import { deleteTodo, updateTodo } from '../api/todo';
 import { Todo } from '../types/TodoType';
 import {
   Box,
@@ -16,23 +17,17 @@ import {
 } from '@chakra-ui/icons';
 
 const TodoItem = ({ todo }: { todo: Todo }) => {
-  // const deleteTodo = (id: number): void => {
-  //   setTodos((todos) => {
-  //     const newTodos = todos.filter((todo: TodoType) => todo.id !== id);
-  //     return newTodos;
-  //   });
-  // };
+  const deleteTodoInRecoil = useDeleteTodo();
+  const updateTodoInRecoil = useUpdateTodo();
 
-  const markDone = (id: string): void => {
-    // setTodos((todos: any) => {
-    //   const newTodos = todos.map((todo: TodoType) => {
-    //     if (todo.id === id) {
-    //       return { ...todo, complete: !todo.complete };
-    //     }
-    //     return todo;
-    //   });
-    //   return newTodos;
-    // });
+  const deleteHandler = async (id: string) => {
+    const deletedTodo = await deleteTodo(id);
+    deleteTodoInRecoil(deletedTodo);
+  };
+
+  const toggleDone = async (todo: Todo) => {
+    const updatedTodo = await updateTodo({ ...todo, done: !todo.done });
+    updateTodoInRecoil(updatedTodo);
   };
 
   return (
@@ -48,11 +43,16 @@ const TodoItem = ({ todo }: { todo: Todo }) => {
           m={2}
           colorScheme="blue"
           size="xs"
-          onClick={() => markDone(todo.id)}
+          onClick={() => toggleDone(todo)}
         >
           {todo.done ? 'Unmark done' : 'Mark done'}
         </Button>
-        {/* <Icon as={DeleteIcon} w={4} h={4} onClick={() => deleteTodo(todo.id)} /> */}
+        <Icon
+          as={DeleteIcon}
+          w={4}
+          h={4}
+          onClick={() => deleteHandler(todo.id)}
+        />
       </Box>
       <Divider w={450} />
     </ListItem>

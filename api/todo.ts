@@ -42,7 +42,7 @@ export const createTodo = async (newTodo: any): Promise<any> => {
     const data = await fetch(`https://${appId}.mockapi.io/todo`, {
       method: 'POST',
       headers: {
-        'Accept': 'application/json',
+        Accept: 'application/json',
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(newTodo),
@@ -58,10 +58,14 @@ export const updateTodo = async (updatedTodo: any): Promise<any> => {
 
   try {
     const data = await fetch(
-      `https://${appId}.mockapi.io/todo${updatedTodo.id}`,
+      `https://${appId}.mockapi.io/todo/${updatedTodo.id}`,
       {
         method: 'PUT',
-        body: updatedTodo,
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(updatedTodo),
       }
     );
     return await data.json();
@@ -74,7 +78,7 @@ export const deleteTodo = async (id: string): Promise<any> => {
   const appId = process.env.NEXT_PUBLIC_API_ID;
 
   try {
-    const data = await fetch(`https://${appId}.mockapi.io/todo${id}`, {
+    const data = await fetch(`https://${appId}.mockapi.io/todo/${id}`, {
       method: 'DELETE',
     });
     return await data.json();
