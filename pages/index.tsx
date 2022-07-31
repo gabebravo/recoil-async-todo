@@ -5,6 +5,7 @@ import TodoCount from '../components/TodoCount';
 import { Todo } from '../types/TodoType';
 import { RecoilRoot } from 'recoil';
 import Todolist from '../components/Todolist';
+import TodoFilter from '../components/TodoFilter';
 
 export async function getStaticProps() {
   // Call an external API endpoint to get todos
@@ -35,6 +36,9 @@ const BasicTodoAtom = ({ todos }: { todos: Todo[] }) => {
           <TodoForm />
         </Box>
         <Box>
+          <TodoFilter />
+        </Box>
+        <Box>
           <Todolist />
         </Box>
       </div>
@@ -43,8 +47,3 @@ const BasicTodoAtom = ({ todos }: { todos: Todo[] }) => {
 };
 
 export default BasicTodoAtom;
-
-// import { css } from '@emotion/react';
-// const todoInput = css`
-//   color: blue;
-// `;

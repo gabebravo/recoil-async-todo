@@ -1,4 +1,5 @@
-import { useDeleteTodo, useUpdateTodo } from '../hooks/todoCrudHooks';
+import useDeleteTodo from '../hooks/useDeleteTodo';
+import useUpdateTodo from '../hooks/useUpdateTodo';
 import { deleteTodo, updateTodo } from '../api/todo';
 import { Todo } from '../types/TodoType';
 import {
