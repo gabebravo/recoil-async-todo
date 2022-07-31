@@ -1,7 +1,7 @@
 import { useSetRecoilState } from 'recoil';
 import { css } from '@emotion/react';
 import { Box, Checkbox, Select } from '@chakra-ui/react';
-import { enabledAtom } from '../recoil/FilterAtom';
+import { enabledAtom } from '../recoil/TodoAtoms';
 import { useFilterTodo } from '../hooks/useFilterTodo';
 
 const filterSelector = css`

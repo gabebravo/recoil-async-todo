@@ -1,6 +1,6 @@
 import { useRecoilCallback } from 'recoil';
 import { todosAtom } from '../recoil/TodoAtoms';
-import { filteredAtom } from '../recoil/FilterAtom';
+import { filteredAtom } from '../recoil/TodoAtoms';
 import { Todo } from '../types/TodoType';
 
 export const useFilterTodo = () =>
@@ -11,7 +11,7 @@ export const useFilterTodo = () =>
         set(
           filteredAtom,
           currTodos.filter(
-            (td) => td.done === (status === 'done' ? true : false)
+            (td: Todo) => td.done === (status === 'done' ? true : false)
           )
         );
       },

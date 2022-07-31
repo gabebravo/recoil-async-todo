@@ -3,7 +3,7 @@ import { Todo } from '../types/TodoType';
 import TodoItem from '../components/TodoItem';
 import { OrderedList } from '@chakra-ui/react';
 import { todosAtom } from '../recoil/TodoAtoms';
-import { enabledAtom, filteredAtom } from '../recoil/FilterAtom';
+import { enabledAtom, filteredAtom } from '../recoil/TodoAtoms';
 
 function Todolist() {
   const todos = useRecoilValue(todosAtom);
@@ -14,7 +14,6 @@ function Todolist() {
   return (
     <div>
       <OrderedList>
-        {/* @ts-ignore */}
         {todoList.map((todo: Todo) => (
           <TodoItem key={todo.id} todo={todo} />
         ))}
