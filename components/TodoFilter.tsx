@@ -1,8 +1,7 @@
 import { useSetRecoilState } from 'recoil';
 import { css } from '@emotion/react';
 import { Box, Checkbox, Select } from '@chakra-ui/react';
-import { enabledAtom } from '../recoil/TodoAtoms';
-import { useFilterTodo } from '../hooks/useFilterTodo';
+import { enabledAtom, filteredAtom } from '../recoil/TodoAtoms';
 
 const filterSelector = css`
   width: 30%;
@@ -11,11 +10,11 @@ const filterSelector = css`
 
 const TodoFilterView = () => {
   const setEnabled = useSetRecoilState(enabledAtom);
-  const filterTodo = useFilterTodo();
+  const setFilter = useSetRecoilState(filteredAtom);
 
   const filterTodoList = (ev: React.FormEvent<EventTarget>) => {
     let target = ev.target as HTMLInputElement;
-    filterTodo(target.value);
+    setFilter(target.value);
   };
 
   const toggleEnabledFlag = () => setEnabled((enabled) => !enabled);

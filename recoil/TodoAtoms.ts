@@ -11,7 +11,7 @@ export const enabledAtom = atom<boolean>({
   default: false,
 });
 
-export const filteredAtom = atom<Todo[]>({
+export const filteredAtom = atom<string>({
   key: 'filteredAtom',
-  default: [],
+  default: '',
 });

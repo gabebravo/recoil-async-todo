@@ -1,4 +1,4 @@
-import { selector } from 'recoil';
+import { selector, selectorFamily } from 'recoil';
 import { getAllTodos } from '../api/todo';
 import { Todo, TodoCount } from '../types/TodoType';
 import { todosAtom } from './TodoAtoms';
@@ -32,4 +32,21 @@ export const todoCountSelector = selector({
     let todos = get(todosAtom);
     return getCount(todos);
   },
+});
+
+type filteredTodosParams = { enabled: boolean; status: string };
+export const filteredTodosSelector = selectorFamily({
+  key: 'filterTodos',
+  get:
+    ({ enabled, status }: filteredTodosParams) =>
+    ({ get }) => {
+      const currTodos = get(todosAtom);
+
+      if (enabled && status) {
+        return currTodos.filter(
+          (td: Todo) => td.done === (status === 'done' ? true : false)
+        );
+      }
+      return currTodos;
+    },
 });
